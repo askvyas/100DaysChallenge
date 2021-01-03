@@ -129,7 +129,7 @@ def get_coffee():
                 deduct_resources(coffee_usr)
 
                 print(f"Her is ${change} in change")
-                print(f"Here is your {coffee_usr} Enjoy")
+                print(f"Here is your ☕️ {coffee_usr} Enjoy")
                 get_coffee()
             else:
                 print("Sorry that's not enough money. Money refunded")
