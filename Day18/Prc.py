@@ -1,9 +1,8 @@
-
-
-from turtle import *
-
+import turtle as t
 import random
-tim = Turtle()
+
+tim = t.Turtle()
+
 # timmy_the_turtle.shape("circle")
 # timmy_the_turtle.color("red")
 # timmy_the_turtle.forward(100)
@@ -50,16 +49,44 @@ tim = Turtle()
 #     B = random.random()
 #     G = random.random()
 #
-#     return t.color(R,G,B)
+#     return t.color(R, G, B)
 #
 #
+# #
+# #
+# #
+# # for i in range(3, 8):
+# #     change_color(tim)
+# #
+# #     for _ in range(i):
+# #         tim.forward(100)
+# #         tim.right(360/i)
+# # random walk
+# direction=[0,90,180,270]
+# # tim.width(random.randint(1,15))
+# tim.pensize(15)
+# tim.speed(0)   # we can give even "fastest" or "fast" etc
+# for i in range(50):
 #
-# for i in range(3, 8):
 #     change_color(tim)
+#     tim.forward(50)
+#     # tim.right(random.randint(0,270,90))
+#     # tim.forward(random.randint(0,10))
+#     # tim.left(random.randint(0,90))
+#     tim.setheading(random.choice(direction))
 #
-#     for _ in range(i):
-#         tim.forward(100)
-#         tim.right(360/i)
 
-screen = Screen()
+# tuples are not changeable / immutable
+# t.colormode(255)
+#
+#
+# def random_color():
+#     r = random.randint(0, 255)
+#     g = random.randint(0, 255)
+#     b = random.randint(0, 255)
+#     random_color= (r, g, b)
+#     return random_color
+
+
+screen = t.Screen()
 screen.exitonclick()
