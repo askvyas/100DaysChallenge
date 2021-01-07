@@ -33,14 +33,18 @@ for i in range(0, 7):
 
 print(l[0].pos()[0])
 flag = True
-win=""
-while flag :
-    for i in range(0,7):
+win = ""
+while flag:
+    for i in range(0, 7):
         l[i].forward(rd.randint(1, 15))
-        if l[i].pos()[0] >= 230 :
-            win=l[i].color()
-            flag=False
+        if l[i].pos()[0] >= 230:
+            win = l[i].color()
+            flag = False
 
-print(f"the winner is {win} ")
+if user_bet == win[0]:
+    print(f"Your Guess was right. The winner is {win[0]}")
+else:
+    print(f"Your Guess was wrong. The winner is {win[0]}")
 
 screen.exitonclick()
+# Complete Day19
