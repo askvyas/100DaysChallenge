@@ -4,7 +4,7 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.title("Snake Game")
-# screen.tracer(0)
+screen.tracer(0)
 # Step 1 Creating a snake
 # Method 1
 # t1=Turtle("square")
@@ -31,20 +31,24 @@ game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
-    for seg in segments:
-        seg.forward(5)
-        seg.setheading(90)
+    for seg_num in range(len(segments)-1,0,-1):
+        new_x=segments[seg_num-1].xcor()
+        new_y=segments[seg_num-1].ycor()
 
-new_segment_pos=[(0,20),(0,0),(0,-20)]
-r_pos=[(0,-20),(0,0),(0,20)]
-count=0
-for seg in segments:
-    seg.setpos(r_pos[count])
-    count+=1
+        segments[seg_num].goto(new_x,new_y)
+    segments[0].forward(20)
+    segments[0].left(90)
 
-
-
-
-
+#
+# new_segment_pos=[(0,20),(0,0),(0,-20)]
+# r_pos=[(0,-20),(0,0),(0,20)]
+# count=0
+# for seg in segments:
+#     seg.setpos(r_pos[count])
+#     count+=1
+#
+# def turn_left(segments):
+#     c_pos=segments[0].positon()
+#     for seg in segments
 
 screen.exitonclick()
