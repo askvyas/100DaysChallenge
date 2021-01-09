@@ -2,10 +2,11 @@ from turtle import Screen, Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
-UP=90
-DOWN=270
-LEFT=180
-RIGHT=0
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
 
 # Step 3 Move all snake code to OOP classes and then use
 class Snake:
@@ -15,12 +16,24 @@ class Snake:
         self.head = self.segments[0]
 
     def create_snake(self):
-        for i in STARTING_POSITIONS:
-            new_segment = Turtle("square")
-            new_segment.color("white")
-            new_segment.penup()
-            new_segment.goto(i)
-            self.segments.append(new_segment)
+        for position in STARTING_POSITIONS:
+            # new_segment = Turtle("square")
+            # new_segment.color("white")
+            # new_segment.penup()
+            # new_segment.goto(position)
+            # self.segments.append(new_segment)
+            self.add_seg(position)
+
+    # Step 9 increasing the snake size
+    def add_seg(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        self.add_seg(self.segments[-1].position())
 
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):
@@ -36,8 +49,6 @@ class Snake:
         # CODE TO RESTRICT CNAKE FROM MOVING BOTH SIDES / MAKING THE SNAKE ONE SIDED
         if self.head.heading() != DOWN:
             self.head.seth(UP)
-
-
 
     def down(self):
         # self.segments[0].seth(270)

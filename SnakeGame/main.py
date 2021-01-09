@@ -58,7 +58,7 @@ screen.tracer(0)
 #     for seg in segments
 snake = Snake()
 food = Food()
-score=Scoreboard()
+score = Scoreboard()
 screen.listen()
 screen.onkey(snake.up, "Up")
 screen.onkey(snake.down, "Down")
@@ -75,14 +75,21 @@ while game_is_on:
     if snake.head.distance(food) < 15:
         print("Collided")
         food.refresh()
+        # Step 9 To extend the snake
+        snake.extend()
+
         score.increase_score()
 
     # Step 8 Detect Collision with walls
-    if snake.head.xcor() >280 or snake.head.xcor() <-280  or snake.head.ycor()>280 or snake.head.ycor() < -280:
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
         score.game_over()
-        game_is_on=False
+        game_is_on = False
 
-
-
+    # Step 10 Head tail collision
+    # if head collides with any of the segment and if it is yes then end the game
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            score.game_over()
+            game_is_on = False
 
 screen.exitonclick()
