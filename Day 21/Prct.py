@@ -1,4 +1,4 @@
-# Day 21 Inheritance and Snake Game Part 2
+# Day 21 Inheritance,Slicing and Snake Game Part 2
 
 class Animal:
     def __init__(self):
@@ -20,6 +20,11 @@ class Fish(Animal):
         print("Swims in water")
 
 
-nemo = Fish()
-nemo.swim()
-nemo.breathe()
+# nemo = Fish()
+# nemo.swim()
+# nemo.breathe()
+
+piano_keys=["a","b","c","d","e","f","g"]
+piano_tup=("a","b","c","d","e","f","g")
+
+print(piano_tup[2:4])
