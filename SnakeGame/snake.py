@@ -1,7 +1,8 @@
-from turtle import Screen,Turtle
+from turtle import Screen, Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
+
 
 # Step 3 Move all snake code to OOP classes and then use
 class Snake:
@@ -25,5 +26,18 @@ class Snake:
             self.segments[seg_num].goto(new_x, new_y)
         self.segments[0].forward(MOVE_DISTANCE)
 
+    # Step 4 Listen to keyboard and move the snake
+    def up(self):
+        self.segments[0].seth(90)
+        self.move()
 
+    def down(self):
+        self.segments[0].seth(270)
+        self.move()
+    def left(self):
+        self.segments[0].seth(180)
+        self.move()
+    def right(self):
+        self.segments[0].seth(0)
+        self.move()
 
