@@ -2,13 +2,17 @@ from turtle import Screen, Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
-
+UP=90
+DOWN=270
+LEFT=180
+RIGHT=0
 
 # Step 3 Move all snake code to OOP classes and then use
 class Snake:
     def __init__(self):
         self.segments = []
         self.create_snake()
+        self.head = self.segments[0]
 
     def create_snake(self):
         for i in STARTING_POSITIONS:
@@ -28,16 +32,24 @@ class Snake:
 
     # Step 4 Listen to keyboard and move the snake
     def up(self):
-        self.segments[0].seth(90)
-        self.move()
+        # self.segments[0].seth(90)
+        # CODE TO RESTRICT CNAKE FROM MOVING BOTH SIDES / MAKING THE SNAKE ONE SIDED
+        if self.head.heading() != DOWN:
+            self.head.seth(UP)
+
+
 
     def down(self):
-        self.segments[0].seth(270)
-        self.move()
-    def left(self):
-        self.segments[0].seth(180)
-        self.move()
-    def right(self):
-        self.segments[0].seth(0)
-        self.move()
+        # self.segments[0].seth(270)
+        if self.head.heading() != UP:
+            self.head.seth(DOWN)
 
+    def left(self):
+        # self.segments[0].seth(180)
+        if self.head.heading() != RIGHT:
+            self.head.seth(LEFT)
+
+    def right(self):
+        # self.segments[0].seth(0)
+        if self.head.heading() != LEFT:
+            self.head.seth(RIGHT)
