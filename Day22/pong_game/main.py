@@ -33,5 +33,12 @@ while game_is_on:
         print("Made Contact")
         ball.bounce_x()
 
+    # Detect of Right paddle misses
+    if ball.xcor() >380:
+        ball.reset_position()
+    if ball.xcor() < -380:
+        ball.reset_position()
+
+
 
 screen.exitonclick()
