@@ -1,6 +1,9 @@
 # Game of US State Quiz
 from turtle import Turtle,Screen
-import  pandas as pd
+import pandas as pd
+
+# Font Constant Declaration
+font=("Arial",10,"normal")
 
 
 # Turtle Setup
@@ -16,33 +19,44 @@ states = df["state"].to_list()
 # Create a list of xcor and ycor from state name from pandas csv
 loc=[]
 for st in states:
-    x_cor=int(df[df["state"]==st]['x'])
-    y_cor=int(df[df["state"]==st]['y'])
+    x_cor=df[df["state"]==st]['x'].astype(int)
+    y_cor=df[df["state"]==st]['y'].astype(int)
     loc.append((x_cor,y_cor))
 
-
-# Create a dictonary with state names and x_cor and y_cor
-dict= {
-    "State":states,
-    "Location":loc
-}
+# Not required
+# # Create a dictonary with state names and x_cor and y_cor
+# dict= {
+#     "State":states,
+#     "Location":loc
+# }
 # Export this dataframe into a pandas
 
 
 # Game in a loop
+# Adding a guessed states
+guessed_states=[]
 game_is_on=True
 while game_is_on:
-    state = screen.textinput("State Name", "Enter The State name")
+    state = screen.textinput("State Name", "Enter The State name").title()
+    # Additional Exit Code added and states that we did not guess
+    if state=="Exit":
+        missing_states=[]
+        for s in states:
+            if s not in guessed_states:
+                missing_states.append(s)
+        print(missing_states)
+        game_is_on=False
     if state in states:
+
         ind=states.index(state)
         tut_gm.goto(loc[ind])
-        tut_gm.write(state, True, align="center")
-
-    else:
-        break
+        tut_gm.write(state, True, align="center",font=font)
+        guessed_states.append(state)
 
 
 
 
 
-screen.exitonclick()
+
+
+
