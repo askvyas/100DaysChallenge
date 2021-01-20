@@ -26,3 +26,10 @@ with open("file2.txt") as file2:
 
 result=[int(n) for n in file1_data if n in file2_data]
 print(result)
+
+# Dictonary Comprhension's
+# Exercise 1 sentence to dict of sentece and len of sentence
+sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
+words=sentence.split()
+len_di={key:len(key) for key in words}
+print(len_di)
