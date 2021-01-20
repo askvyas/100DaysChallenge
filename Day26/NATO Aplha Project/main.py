@@ -28,6 +28,6 @@ print(nato_name)
 
 user_inp=input("Enter Your Name")
 ur_name=[l.lower() for l in user_inp]
-res=[val for (key,val) in nato_name.items() if key in ur_name]
+res=[nato_name[l] for l in ur_name]
 print(res)
 
