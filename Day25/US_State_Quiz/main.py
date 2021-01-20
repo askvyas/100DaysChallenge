@@ -40,10 +40,12 @@ while game_is_on:
     state = screen.textinput("State Name", "Enter The State name").title()
     # Additional Exit Code added and states that we did not guess
     if state=="Exit":
-        missing_states=[]
-        for s in states:
-            if s not in guessed_states:
-                missing_states.append(s)
+        # Adding List Comprehension
+        missing_states = [st for st in states if st not in guessed_states]
+
+        # for s in states:
+        #     if s not in guessed_states:
+        #         missing_states.append(s)
         print(missing_states)
         game_is_on=False
     if state in states:
