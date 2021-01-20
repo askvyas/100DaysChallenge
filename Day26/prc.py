@@ -33,3 +33,16 @@ sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
 words=sentence.split()
 len_di={key:len(key) for key in words}
 print(len_di)
+
+# Exercise 2 celcius to Farenheit
+weather_c = {
+    "Monday": 12,
+    "Tuesday": 14,
+    "Wednesday": 15,
+    "Thursday": 14,
+    "Friday": 21,
+    "Saturday": 22,
+    "Sunday": 24,
+}
+temp_f={key:((value*9/5)+32) for (key,value) in weather_c.items()}
+print(temp_f)
