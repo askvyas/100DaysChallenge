@@ -6,22 +6,25 @@ window.minsize(width=500,height=300)
 
 # Label
 my_label= tkinter.Label(text="I am a label",font=("Arial",24,"bold"))
-my_label.pack(side="left")
+my_label.pack()
+my_label["text"]="New Text"
+my_label.config(text="New Text2")
 
+# Button
+# def button_click():
+#     my_label.config(text="Button got clicked")
+# button = tkinter.Button(text="click me",command=button_click)
+# button.pack(side="bottom")
 
+# Entry
+input=tkinter.Entry(width=10)
+input.pack()
+print(input.get())
 
-# use unlimited Arguments known as unlimited position arguments
-def add(*args):
-    sum=0
-    for n in args:
-        sum=sum+n
-    print(sum)
-add(1,2,3,4,5,6,7,8,10,11,1)
-add(1,9)
-
-
-
-
+def button_click():
+    my_label.config(text=input.get())
+button = tkinter.Button(text="click me",command=button_click)
+button.pack(side="bottom")
 
 
 
