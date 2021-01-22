@@ -10,9 +10,17 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps=0
-
+timer=None
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_time():
+
+    window.after_cancel(timer)
+    head_label.config(text="Pomodoro")
+    canvas.itemconfig(timer_text,text="00:00")
+    tick_label.config(text="")
+    global reps
+    reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_time():
@@ -25,6 +33,7 @@ def start_time():
     if reps%2 != 0:
         countdown(work_sec)
         head_label.config(text="Work", fg=GREEN)
+
 
     elif reps==8:
         countdown(long_break_sec)
@@ -42,6 +51,7 @@ def start_time():
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def countdown(count):
     # format time in seconds to "00:00"
+    global reps
     min = math.floor(count/60)
     sec=count%60
     if sec<=9:
@@ -49,9 +59,16 @@ def countdown(count):
     canvas.itemconfig(timer_text,text=f"{min}:{sec}")
 
     if (count > 0):
-        window.after(1000, countdown, count - 1)
+        global timer
+        timer=window.after(1000, countdown, count - 1)
     else:
         start_time()
+        marks=""
+        for _ in range(math.floor(reps/2)):
+            marks+="✔"
+        tick_label.config(text=marks)
+
+
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -75,10 +92,9 @@ canvas.grid(column=1, row=1)
 btn_strt = Button(text="Start", highlightthickness=0,command=start_time)
 btn_strt.grid(column=0, row=2)
 
-btn_rst = Button(text="Reset", highlightthickness=0)
+btn_rst = Button(text="Reset", highlightthickness=0,command=reset_time)
 btn_rst.grid(column=2, row=2)
 
-tick_label = Label(text="✔")
-tick_label.config(bg=YELLOW, fg=GREEN, highlightthickness=0)
+tick_label = Label(fg=GREEN,bg=YELLOW)
 tick_label.grid(column=1, row=3)
 window.mainloop()
