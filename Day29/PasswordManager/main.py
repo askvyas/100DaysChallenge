@@ -7,7 +7,12 @@ FONT = ("Arial", 20, "italic")
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
-
+# Creating a fucntion for Add buttoon
+def fun_add(web,email,pwd):
+    if web!="" and email !="" and pwd!="":
+        with open("data.txt","w+"):
+            data=f"{web} | {email} | {pwd}"
+        
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password Manager")
@@ -22,25 +27,27 @@ canvas.grid(column=1, row=0)
 
 # Adding Input labels
 # 1.1 Website Label
-web_label = Label(text="Website", font=FONT)
+web_label = Label(text="Website:")
 web_label.grid(column=0, row=1)
 # 1.1 Website input
 web_entry = Entry(width=35)
 web_entry.grid(column=1, row=1, columnspan=2)
-
+# Get the coursor to this entry
+web_entry.focus()
 # 2.1 Email Label
-email_label = Label(text="Email/Username", font=FONT)
+email_label = Label(text="Email/Username:")
 email_label.grid(column=0, row=2)
 # 2.1 Email Input
 email_entry = Entry(width=35)
 email_entry.grid(column=1, row=2, columnspan=2)
-
+# Adding defaulot email in to the email_entry
+email_entry.insert(END,text="askvyas@gmail.com")
 # 3.1 Password Label
-pwd_label = Label(text="Password", font=FONT)
+pwd_label = Label(text="Password:  ")
 pwd_label.grid(column=0, row=3)
 # 3.2 Password input
 pwd_entry = Entry(width=21)
-pwd_entry.grid(column=1, row=3,columnspan=1)
+pwd_entry.grid(column=1, row=3)
 
 # 4 Generate Password Button
 gen_pwd=Button(text="Generate Password")
