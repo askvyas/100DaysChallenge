@@ -18,21 +18,28 @@ nr_numbers = random.randint(2, 4)
 
 password_list = []
 
-for char in range(nr_letters):
-  password_list.append(random.choice(letters))
+# for char in range(nr_letters):
+#   password_list.append(random.choice(letters))
 # using list comprehensio for the same code as above
+password_list+=[random.choice(letters) for _  in range(nr_letters)]
 
-for char in range(nr_symbols):
-  password_list += random.choice(symbols)
+# print(password_list)
+# for char in range(nr_symbols):
+#   password_list += random.choice(symbols)
+password_list+=[random.choice(symbols) for _  in range(nr_symbols)]
 
-for char in range(nr_numbers):
-  password_list += random.choice(numbers)
+# for char in range(nr_numbers):
+#   password_list += random.choice(numbers)
+password_list+=[random.choice(numbers) for _  in range(nr_numbers)]
+
 
 random.shuffle(password_list)
 
-password = ""
-for char in password_list:
-  password += char
+# password = ""
+# for char in password_list:
+#   password += char
+# implementing the above code using .join() method
+password="".join(password_list)
 
 print(f"Your password is: {password}")
 # ---------------------------- SAVE PASSWORD ------------------------------- #
