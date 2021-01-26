@@ -2,46 +2,54 @@
 from tkinter import *
 from tkinter import messagebox
 import random
+import pyperclip
+
 # Constants
 FONT = ("Arial", 20, "italic")
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+# generate password function
+def gen_password():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+               'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+    nr_letters = random.randint(8, 10)
+    nr_symbols = random.randint(2, 4)
+    nr_numbers = random.randint(2, 4)
 
-nr_letters = random.randint(8, 10)
-nr_symbols = random.randint(2, 4)
-nr_numbers = random.randint(2, 4)
+    password_list = []
 
-password_list = []
+    # for char in range(nr_letters):
+    #   password_list.append(random.choice(letters))
+    # using list comprehensio for the same code as above
+    password_list += [random.choice(letters) for _ in range(nr_letters)]
 
-# for char in range(nr_letters):
-#   password_list.append(random.choice(letters))
-# using list comprehensio for the same code as above
-password_list+=[random.choice(letters) for _  in range(nr_letters)]
+    # print(password_list)
+    # for char in range(nr_symbols):
+    #   password_list += random.choice(symbols)
+    password_list += [random.choice(symbols) for _ in range(nr_symbols)]
 
-# print(password_list)
-# for char in range(nr_symbols):
-#   password_list += random.choice(symbols)
-password_list+=[random.choice(symbols) for _  in range(nr_symbols)]
+    # for char in range(nr_numbers):
+    #   password_list += random.choice(numbers)
+    password_list += [random.choice(numbers) for _ in range(nr_numbers)]
 
-# for char in range(nr_numbers):
-#   password_list += random.choice(numbers)
-password_list+=[random.choice(numbers) for _  in range(nr_numbers)]
+    random.shuffle(password_list)
+
+    # password = ""
+    # for char in password_list:
+    #   password += char
+    # implementing the above code using .join() method
+    password = "".join(password_list)
+    pwd_entry.insert(END, password)
+
+    # using pyperclip to copy generated password into your clipboard
+    pyperclip.copy(password)
 
 
-random.shuffle(password_list)
-
-# password = ""
-# for char in password_list:
-#   password += char
-# implementing the above code using .join() method
-password="".join(password_list)
-
-print(f"Your password is: {password}")
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 # Creating a fucntion for Add buttoon
 # 6
@@ -51,8 +59,8 @@ def fun_add():
     pwd = pwd_entry.get()
 
     # validation for empty values in entry
-    if len(web)==0 or len(pwd)==0:
-        messagebox.showinfo(title="OOPS",message="Please make sure you havent left any fields empty")
+    if len(web) == 0 or len(pwd) == 0:
+        messagebox.showinfo(title="OOPS", message="Please make sure you havent left any fields empty")
     else:
         # giving a popup/Messagebox
         # messagebox.showinfo(title="Title",message="Message")
@@ -64,9 +72,6 @@ def fun_add():
                 file.write(data)
                 web_entry.delete(0, END)
                 pwd_entry.delete(0, END)
-
-
-
 
 
 # def add_fun():
@@ -112,7 +117,7 @@ email_entry = Entry(width=35)
 email_entry.grid(column=1, row=2, columnspan=2)
 
 # Adding default email in to the email_entry
-email_entry.insert(END, "askvyas@gmail.com")
+email_entry.insert(0, "askvyas@gmail.com")
 
 # 3.1 Password Label
 pwd_label = Label(text="Password:  ")
@@ -123,11 +128,8 @@ pwd_entry = Entry(width=21)
 pwd_entry.grid(column=1, row=3)
 
 # 4 Generate Password Button
-gen_pwd = Button(text="Generate Password")
+gen_pwd = Button(text="Generate Password", command=gen_password)
 gen_pwd.grid(column=2, row=3)
-
-# 7
-
 
 # 5 AddButton
 add_but = Button(text="Add", width=36, command=fun_add)
