@@ -8,11 +8,13 @@ FONT = ("Arial", 20, "italic")
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 # Creating a fucntion for Add buttoon
+# 6
 def fun_add(web,email,pwd):
     if web!="" and email !="" and pwd!="":
-        with open("data.txt","w+"):
-            data=f"{web} | {email} | {pwd}"
-        
+        with open("data.txt","a") as file:
+            data=f"\n{web} | {email} | {pwd}"
+            file.write(data)
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password Manager")
@@ -41,7 +43,7 @@ email_label.grid(column=0, row=2)
 email_entry = Entry(width=35)
 email_entry.grid(column=1, row=2, columnspan=2)
 # Adding defaulot email in to the email_entry
-email_entry.insert(END,text="askvyas@gmail.com")
+email_entry.insert(END,"askvyas@gmail.com")
 # 3.1 Password Label
 pwd_label = Label(text="Password:  ")
 pwd_label.grid(column=0, row=3)
@@ -53,8 +55,19 @@ pwd_entry.grid(column=1, row=3)
 gen_pwd=Button(text="Generate Password")
 gen_pwd.grid(column=2,row=3)
 
+# 7
+def add_fun():
+    fun_add(web_entry.get(),email_entry.get(),pwd_entry.get())
+    web_entry.delete(0, END)
+    web_entry.insert(0, "")
+    email_entry.delete(0, END)
+    email_entry.insert(0, "")
+    pwd_entry.delete(0, END)
+    pwd_entry.insert(0, "")
+
+
 # 5 AddButton
-add_but=Button(text="Add",width=36)
+add_but=Button(text="Add",width=36,command=add_fun)
 add_but.grid(column=1,row=4,columnspan=2)
 
 window.mainloop()
